@@ -212,7 +212,7 @@ static const struct DCTOAuth1AccountProperties DCTOAuth1AccountProperties = {
 	};
 
 	void (^fetchAccessToken)() = ^{
-		DCTAuthRequest *request = [[DCTAuthRequest alloc] initWithRequestMethod:DCTAuthRequestMethodGET URL:self.accessTokenURL items:nil];
+		DCTAuthRequest *request = [[DCTAuthRequest alloc] initWithRequestMethod:DCTAuthRequestMethodPOST URL:self.accessTokenURL items:nil];
 		request.HTTPHeaders = @{ @"Authorization" : signature(request) };
 		[request performRequestWithHandler:accessTokenHandler];
 	};
@@ -238,7 +238,7 @@ static const struct DCTOAuth1AccountProperties DCTOAuth1AccountProperties = {
 		self.openURLObject = [DCTAuth openURL:authorizeURL withCallbackURL:self.callbackURL handler:authorizeHandler];
 	};
 
-	DCTAuthRequest *requestTokenRequest = [[DCTAuthRequest alloc] initWithRequestMethod:DCTAuthRequestMethodGET URL:self.requestTokenURL items:nil];
+	DCTAuthRequest *requestTokenRequest = [[DCTAuthRequest alloc] initWithRequestMethod:DCTAuthRequestMethodPOST URL:self.requestTokenURL items:nil];
 	requestTokenRequest.HTTPHeaders = @{ @"Authorization" : signature(requestTokenRequest) };
 	[requestTokenRequest performRequestWithHandler:requestTokenHandler];
 }
